@@ -21,7 +21,7 @@ We will apply a `Laptop` filter as follows:
 - RAM Size: 8 GB
 
 ### Procedure
-web scraping procedure can change from site to site. We will use a general procedure at this project to pull laptop product list from `flipkart` and `Amazon` webpages after applying our filter.
+Web scraping procedure can change from site to site. We will use a general procedure to pull laptop product list from **flipkart** and **Amazon** webpages after applying the mentioned filter.
 
 General Procedure:
 - Webpage Inspection
@@ -31,14 +31,14 @@ General Procedure:
 Then, we will check what products does each website offer for the same filter.
 
 ## Steps
-General steps for building a simple web scraper include **webpage inspection** to obtain needed HTML tags, **get request** to fetch webpage data, and **extract tag information**. We will add the **web driver step** to fetch data from amazon webpage.
+Let us take a closer look at the procedure, we will start with **webpage inspection** to obtain needed HTML tags, then we will check **get request** to fetch webpage data, and **extract tag information** at the end to extract information from tags.
 
 ### Webpage Inspection
 Go to your browser, open this link `https://tinyurl.com/yv39w9re`, perform right mouse click and choose `inspect`. You will then see something that looks like this - raw code behind the site:
 
 ![image info](./assets/inspect_01.png)
 
-To to get to specific tag within the HTML, you need to click on the arrow symbnol to start navigating through the tags. When hovering the mouse on a tag, the relevant webpage area will be highlighted. So in our example here, if we want to locate the tag that has the product name, we will navigating through tags till the one called `_4rR01T`:
+To to get to specific tag within the HTML, you need to click on the arrow symbol to start navigating through tags. When hovering the mouse on a tag, relevant webpage area will be highlighted. So in our example here, if we want to locate the tag that has the product name, we will navigate through tags till the one called `_4rR01T`:
 
 ![image info](./assets/inspect_02.png)
 
@@ -56,7 +56,7 @@ We will use a library called [beautiful soup](https://pypi.org/project/beautiful
 >
 > `soup.findAll('<your_tag>', attrs={'<attribute_name>':'<value>'})`
 
-`content` is the HTML code that we get back from get request while `findAll` function returns a list of all selected tags where you can then loop over them to extract needed data from selected tags.
+`content` is the HTML code that we get back from get request while `findAll` function returns a list of all selected tags where you can then loop over to extract needed data from selected tags.
 
 ## Starter Code
 Check the file called `main.py` for a starter code. You will find some import statements, function signatures, and constant values you will need to use in implementation. One important note here is the value of `headers` you may need at the request function as requested by some websites.
