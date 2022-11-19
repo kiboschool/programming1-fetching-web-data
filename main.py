@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import csv, os, sys
 
-# Constant Values
+# Constant Values - No need to change
 base_url = 'https://www.jumia'
 needed_product = 'laptops'
 specs = {
@@ -12,20 +12,27 @@ specs = {
         'rating': '4-5'
         }
 
+# Used to run over all supported countries in our scraper
 registered_country_codes = {'Nigeria': 'ng',
                             'Tunisia': 'tn',
                             'Kenya': 'ke',
                             'Uganda': 'ug', 
                             'Senegal': 'sn'}
 
+# Use this in building your URL
 com_domain_country_codes = ['ng', 'tn']
 co_domain_country_codes = ['ke']
 no_domain_country_codes = ['ug', 'sn']
         
 
-def fetch_product_data(country_code, filter, product_name, brand):
+def fetch_product_data(country_code, filter, product_name, brand): # TODO: Implement fetch_product_data function
     """
     Access Jumia webpage constructed link and returns a dictionary where key is product name and value is product price
+    Procedure:
+    1) Construct proper URL based on functions inputs -> check your generated URL using a browser
+    2) Perform a GET request and check status code for the response -> Handle failing coded witha a suitable statment
+    3) Use Beautiful Soup to fetch list of products and a list of prices
+    4) Create a dictionary with suitable <Product, Price> pairs.
 
     :param country_code: Country code according to Jumia website
     :param filter: a dictionary for all needed parameters in get request for Jumia
@@ -77,14 +84,14 @@ def fetch_product_data(country_code, filter, product_name, brand):
     return product_info
 
 
-def build_specs():
+def build_specs(): # Implemented - No need to change
     """
     Access global predefined specifications and returns needed request parameters with suitable format.
     """
     filter = {k: specs[k] for k in specs.keys() - {'brand'}}
     return ("&".join(f'{k}={v}' for k,v in filter.items()))
 
-def build_brands():
+def build_brands(): # Implemented - No need to change
     """
     Access global predefined brand list and returns needed brands with suitable format.
     """
@@ -93,7 +100,7 @@ def build_brands():
     else:
         return None
 
-def save_to_file(country, data):
+def save_to_file(country, data): # TODO: Implement save to file 
     """
     Opens a csv file and saves each country's data.
     :param country: Country Name
@@ -105,9 +112,14 @@ def save_to_file(country, data):
         for product, price in data.items():
             writer.writerow([product, price])
 
-def run_scraper(filename):
+def run_scraper(filename): # Implemented - No need to change
     """
     Triggers the whole procedure of scraping.
+    Procedure:
+    1) Loop over supported countries
+    2) Try fetching data for each country webpage
+    3) Check returned data and save it to file if relevant
+
     :param filename: File name specified by user -> input argument
     """
     if os.path.exists(filename):
